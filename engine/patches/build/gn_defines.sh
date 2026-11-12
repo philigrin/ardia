@@ -6,7 +6,7 @@ _gn_args=(
   symbol_level=0 blink_symbol_level=0 v8_symbol_level=0
   is_component_build=false
   forbid_non_component_debug_builds=false
-  target_cpu='"arm64"'
+  "target_cpu=\"${GN_CPU:?source env.sh first}\""
   proprietary_codecs=true
   'ffmpeg_branding="Chrome"'
   enable_mse_mpeg2ts_stream_parser=true

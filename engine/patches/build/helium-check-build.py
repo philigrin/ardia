@@ -17,6 +17,7 @@ OUT_DIR defaults to ~/chromium-build/chromium_git/chromium/src/out/Release_GN_ar
 """
 import argparse
 import gzip
+import os
 import pathlib
 import shutil
 import struct
@@ -24,7 +25,7 @@ import subprocess
 import sys
 import tempfile
 
-OUT = pathlib.Path.home() / 'chromium-build/chromium_git/chromium/src/out/Release_GN_arm64'
+OUT = pathlib.Path.home() / 'chromium-build/chromium_git/chromium/src/out' / os.environ.get('GN_OUT_CONFIGS', 'Release_GN_arm64')
 OMITTED_GEN = ['gen/third_party/ublock', 'gen/components/helium_onboarding',
                'gen/third_party/search_engines_data/resources_internal']
 OMITTED_CODE = {
