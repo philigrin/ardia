@@ -10,7 +10,13 @@ export HELIUM_TAG=0.21.2
 export HELIUM_MACOS_TAG=0.21.2.1
 export HELIUM_DIR="$CB/helium"
 export HELIUM_MACOS_DIR="$CB/helium-macos"
-export GN_OUT_CONFIGS=Release_GN_arm64
+export ARDIA_ARCH="${ARDIA_ARCH:-arm64}"
+case "$ARDIA_ARCH" in
+  arm64) export GN_CPU=arm64 ;;
+  x86_64) export GN_CPU=x64 ;;
+  *) echo "env.sh: ARDIA_ARCH is arm64 or x86_64, got '$ARDIA_ARCH'" >&2; return 64 2>/dev/null || exit 64 ;;
+esac
+export GN_OUT_CONFIGS="Release_GN_$GN_CPU"
 lowprio() { taskpolicy -b nice -n 19 "$@"; }
 lowprio_net() { taskpolicy -c utility -d throttle nice -n 19 "$@"; }
 export DEPOT_TOOLS_METRICS=0
